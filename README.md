@@ -1,6 +1,7 @@
 ## 注意事项
 1. 一定要在克隆后生成的目录下新建虚拟环境</br>
-   ![图片](https://github.com/user-attachments/assets/afd96f05-e3b5-42e0-8d62-b3d6ae310d70)
+   ![就像这样](https://github.com/user-attachments/assets/244e5d67-7710-4ee8-a32f-5d7f07d1eb24)
+
 
 2. 第一次运行时，会自动下载模型</br>
 
