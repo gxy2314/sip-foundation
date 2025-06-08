@@ -30,7 +30,7 @@ import time
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
-sys.path.append('{}/third_party/Matcha-TTS'.format(ROOT_DIR))
+sys.path.insert(0, './third_party/Matcha-TTS')
 
 from cosyvoice.cli.cosyvoice import CosyVoice, CosyVoice2
 from cosyvoice.utils.file_utils import load_wav, logging
@@ -235,7 +235,7 @@ def generate_audio(tts_text, mode_checkbox_group, sft_dropdown, prompt_text, pro
     """生成音频的主函数
     
     Args:
-        tts_text: 合成文本
+        tts_text: 合成文本,也就是最后读的内容
         mode_checkbox_group: 推理模式 
         sft_dropdown: 预训练音色
         prompt_text: prompt文本
@@ -253,7 +253,7 @@ def generate_audio(tts_text, mode_checkbox_group, sft_dropdown, prompt_text, pro
     logging.info(f"开始生成音频 - 模式: {mode_checkbox_group}, 文本长度: {len(tts_text)}")
     # 处理prompt音频输入
     prompt_wav = prompt_wav_upload if prompt_wav_upload is not None else prompt_wav_record
-
+    print(f"输入音频:{prompt_wav}")
     # 验证输入
     is_valid, error_msg = validate_input(mode_checkbox_group, tts_text, sft_dropdown, 
                                        prompt_text, prompt_wav, instruct_text)
@@ -326,7 +326,7 @@ def main():
         tts_text = gr.Textbox(
             label="输入合成文本", 
             lines=1, 
-            value="CosyVoice迎来全面升级，提供更准、更稳、更快、 更好的语音生成能力。CosyVoice is undergoing a comprehensive upgrade, providing more accurate, stable, faster, and better voice generation capabilities."
+            value="小牛马出品，必属精品"
         )
         
         with gr.Row():
@@ -465,7 +465,7 @@ def main():
 
     # 配置队列和启动服务
     demo.queue(max_size=4, default_concurrency_limit=2)
-    demo.launch(server_name='0.0.0.0', server_port=args.port, inbrowser=args.open)
+    demo.launch(server_name='0.0.0.0', server_port=args.port, share=True)
 
 
 if __name__ == '__main__':
